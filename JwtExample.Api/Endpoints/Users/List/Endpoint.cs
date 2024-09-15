@@ -10,7 +10,9 @@ public class Endpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder builder)
     {
-        builder.MapGet("users", HandleAsync);
+        builder
+            .MapGet("users", HandleAsync)
+            .RequireAuthorization();
     }
 
     public async ValueTask<Ok<GetResponse>> HandleAsync(

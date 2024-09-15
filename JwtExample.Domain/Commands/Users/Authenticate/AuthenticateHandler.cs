@@ -44,6 +44,8 @@ public class AuthenticateHandler : IRequestHandler<AuthenticateCommand, Authenti
             Subject = GenerateClaims(request),
             Expires = DateTime.UtcNow.AddMinutes(_JwtOptions.MinutesToLive),
             SigningCredentials = credentials,
+            Issuer = _JwtOptions.Authority,
+            Audience = _JwtOptions.Audience
         };
 
         var token = handler.CreateToken(tokenDescriptor);
